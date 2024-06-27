@@ -1,15 +1,20 @@
 package com.example.banhang.entity;
 
+import com.example.banhang.entity.ChatLieu;
+import com.example.banhang.entity.ThuongHieu;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.sql.Date;
 
 @Getter
@@ -43,5 +48,11 @@ public class SanPham {
     @Column(name = "NgaySua")
     private Date ngaySua;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_ChatLieu")
+    private ChatLieu chatLieu;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_ThuongHieu")
+    private ThuongHieu thuongHieu;
 }

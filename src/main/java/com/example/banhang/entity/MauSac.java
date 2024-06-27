@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
 @Setter
@@ -20,19 +20,20 @@ import java.util.Date;
 @Table(name = "MauSac")
 @Entity
 public class MauSac {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;;
+    @Column(name = "Id")
+    private Long id;
 
-    @Column(name = "MA")
-    private String ma;
     @Column(name = "Ten")
-    private  String ten;
+    private String ten;
+
     @Column(name = "TrangThai")
-    private String trangThai;
+    private boolean trangThai;
+
     @Column(name = "NgayTao")
     private Date ngayTao;
-    @Column(name = "NgaySua")
-    private Date ngaySua;
+
+
 }
