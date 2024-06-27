@@ -17,7 +17,7 @@ public class SanPhamController {
 
     @Autowired
     private SanPhamRepository sanPhamRepo;
-
+// test
     @GetMapping("/san-pham")
     public String hienThi(Model model){
         model.addAttribute("listSP",sanPhamRepo.findAll());
