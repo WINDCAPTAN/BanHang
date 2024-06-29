@@ -35,7 +35,7 @@ public class SanPham {
     private Integer soLuong;
 
     @Column(name = "TrangThai")
-    private boolean trangThai;
+    private Boolean trangThai;
 
     @Column(name = "NgayTao")
     private Date ngayTao;
