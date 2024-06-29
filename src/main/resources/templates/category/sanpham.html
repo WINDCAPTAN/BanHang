@@ -61,13 +61,25 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-4">
-                                        <div id="dataTable_filter" class="dataTables_filter">
-                                            <label>Search:
-                                                <input type="search" class="form-control form-control-sm" placeholder=""
-                                                       aria-controls="dataTable">
-                                            </label>
+                                    <form th:action="@{/search}" method="get" class="mb-3">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="searchTenSP" class="form-label">Tên Sản Phẩm</label>
+                                                <input type="text" class="form-control" id="searchTenSP" name="ten">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="searchTrangThai" class="form-label">Trạng Thái</label>
+                                                <select class="form-select" id="searchTrangThai" name="trangThai">
+                                                    <option value="" selected>Tất Cả</option>
+                                                    <option value="true">Đang Bán</option>
+                                                    <option value="false">Ngừng Bán</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 d-flex align-items-end">
+                                                <button type="submit" class="btn btn-primary w-100">Tìm Kiếm</button>
+                                            </div>
                                         </div>
+                                    </form>
                                     </div>
                                     <div class="col-sm-12 col-md-4">
                                         <a href="#" class="btn btn-primary" data-toggle="modal"
@@ -92,67 +104,40 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr th:each="listSP: ${listSP}">
-                                                <td th:text="${listSP.id}"></td>
-                                                <td th:text="${listSP.ma}"></td>
-                                                <td th:text="${listSP.ten}"></td>
-                                                <td th:text="${listSP.soLuong}"></td>
-                                                <td th:text="${listSP.trangThai ? 'Đang Bán':'Ngừng Bán'}"></td>
-                                                <td th:text="${listSP.ngayTao}"></td>
+                                            <tr th:each="sanPham, iterStat: ${listSP.content}">
+                                                <td th:text="${sanPham.id}"></td>
+                                                <td th:text="${sanPham.ma}"></td>
+                                                <td th:text="${sanPham.ten}"></td>
+                                                <td th:text="${sanPham.soLuong}"></td>
+                                                <td th:text="${sanPham.trangThai ? 'Đang Bán':'Ngừng Bán'}"></td>
+                                                <td th:text="${sanPham.ngayTao}"></td>
                                                 <td>
-                                                    <a th:href="@{'/san-pham/add-chitiet/' + ${listSP.id}}" class="btn btn-success">+</a>
+                                                    <a th:href="@{'/san-pham/add-chitiet/' + ${sanPham.id}}" class="btn btn-success">+</a>
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="dataTables_info" id="dataTable_info" role="status"
-                                             aria-live="polite">Showing 1 to 10 of 57 entries
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-7">
-                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                            <ul class="pagination">
-                                                <li class="paginate_button page-item previous disabled"
-                                                    id="dataTable_previous"><a href="#" aria-controls="dataTable"
-                                                                               data-dt-idx="0" tabindex="0"
-                                                                               class="page-link">Previous</a></li>
-                                                <li class="paginate_button page-item active"><a href="#"
-                                                                                                aria-controls="dataTable"
-                                                                                                data-dt-idx="1"
-                                                                                                tabindex="0"
-                                                                                                class="page-link">1</a>
-                                                </li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="dataTable"
-                                                                                          data-dt-idx="2" tabindex="0"
-                                                                                          class="page-link">2</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="dataTable"
-                                                                                          data-dt-idx="3" tabindex="0"
-                                                                                          class="page-link">3</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="dataTable"
-                                                                                          data-dt-idx="4" tabindex="0"
-                                                                                          class="page-link">4</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="dataTable"
-                                                                                          data-dt-idx="5" tabindex="0"
-                                                                                          class="page-link">5</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="dataTable"
-                                                                                          data-dt-idx="6" tabindex="0"
-                                                                                          class="page-link">6</a></li>
-                                                <li class="paginate_button page-item next" id="dataTable_next"><a
-                                                        href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-                                                        class="page-link">Next</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${trangHienTai == 0} ? 'disabled'">
+                                        <a class="page-link" th:href="@{/san-pham(p=${trangHienTai - 1})}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(0, tongSoTrang - 1)}"
+                                        th:classappend="${i == trangHienTai} ? 'active'">
+                                        <a class="page-link" th:href="@{/san-pham(p=${i})}" th:text="${i + 1}">1</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${trangHienTai == tongSoTrang - 1} ? 'disabled'">
+                                        <a class="page-link" th:href="@{/san-pham(p=${trangHienTai + 1})}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
                             </div>
                         </div>
                     </div>

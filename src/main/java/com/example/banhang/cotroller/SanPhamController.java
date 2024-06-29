@@ -58,8 +58,12 @@ public class SanPhamController {
 //        model.addAttribute("tongSoTrang", page.getTotalPages());
 //        return "sanpham";
 
-    public String hienThi(Model model){
-        model.addAttribute("listSP",sanPhamRepo.findAll());
+    public String hienThi(@RequestParam(defaultValue = "0") int p, Model model){
+        Pageable pageable = PageRequest.of(p,5);
+        Page<SanPham> page = sanPhamRepo.findAll(pageable);
+        model.addAttribute("listSP",page);
+        model.addAttribute("trangHienTai",p);
+        model.addAttribute("tongSoTrang",page.getTotalPages());
         return "category/sanpham";
     }
     @GetMapping("/san-pham/add-chitiet/{id}")
@@ -121,30 +125,6 @@ public class SanPhamController {
         // Redirect to appropriate page after successful addition
         return "redirect:/san-pham/add-chitiet/"+idSP;
     }
-//    @GetMapping("/search")
-//    public String search(@RequestParam("ten") String ten,
-//                         @RequestParam("trangThai") Boolean trangThai,
-//                         Model model){
-//        model.addAttribute("listSP",sanPhamRepo.search(ten,trangThai));
-//        return "sanpham";
-//    }
-//@GetMapping("/search")
-//public String searchSanPham(@RequestParam(required = false) String ten,
-//                            @RequestParam(required = false) Optional<Boolean> trangThai,
-//                            @RequestParam(defaultValue = "3") int p,
-//                            Model model) {
-//        Pageable pageable = PageRequest.of(p,3);
-//    Page<SanPham> page;
-//    if ((ten == null || ten.isEmpty()) && !trangThai.isPresent()) {
-//        page = sanPhamRepo.findAll(pageable);
-//    } else {
-//        page = sanPhamRepo.search(ten, trangThai.orElse(null), pageable);
-//    }
-//    model.addAttribute("listSP", pageable);
-//    model.addAttribute("trangHienTai",p);
-//    model.addAttribute("tongSoTrang",pageable);
-//    return "sanpham";
-//}
 @GetMapping("/search")
 public String searchSanPham(@RequestParam(required = false) String ten,
                             @RequestParam(required = false) Boolean trangThai,
@@ -164,7 +144,7 @@ public String searchSanPham(@RequestParam(required = false) String ten,
     model.addAttribute("listSP", page);
     model.addAttribute("trangHienTai", p);
     model.addAttribute("tongSoTrang", page.getTotalPages());
-    return "sanpham";
+    return "category/sanpham";
 }
 
 
