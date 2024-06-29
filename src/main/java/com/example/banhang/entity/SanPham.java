@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -55,4 +57,11 @@ public class SanPham {
     @ManyToOne
     @JoinColumn(name = "ID_ThuongHieu")
     private ThuongHieu thuongHieu;
+
+    @OneToMany(mappedBy = "sanPham")
+    private List<SanPhamChiTiet> chiTietSanPhams;
+
+    public void updateSoLuong() {
+        this.soLuong = chiTietSanPhams.stream().mapToInt(SanPhamChiTiet::getSoLuong).sum();
+    }
 }

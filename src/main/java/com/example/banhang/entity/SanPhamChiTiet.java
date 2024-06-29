@@ -54,7 +54,7 @@ public class SanPhamChiTiet {
 
     @ManyToOne
     @JoinColumn(name = "ID_KichCo")
-    private KichThuoc kichThuoc;
+    private KichThuoc kichCo;
 
     @ManyToOne
     @JoinColumn(name = "ID_MauSac")
