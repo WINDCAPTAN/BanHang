@@ -1,0 +1,114 @@
+<!-- Sidebar -->
+<sidebar xmlns:th="http://www.thymeleaf.org">
+    <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+                <a th:href="@{/admin}" class="logo">
+                    <img
+                            th:src="@{/assets/img/kaiadmin/logo_light.svg}"
+                            alt="navbar brand"
+                            class="navbar-brand"
+                            height="20"
+                    />
+                </a>
+                <button
+                        class="navbar-toggler sidenav-toggler ms-auto"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="collapse"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+              <span class="navbar-toggler-icon">
+                <i class="gg-menu-right"></i>
+              </span>
+                </button>
+                <button class="topbar-toggler more">
+                    <i class="icon-options-vertical"></i>
+                </button>
+                <div class="nav-toggle">
+                    <button class="btn btn-toggle toggle-sidebar">
+                        <i class="gg-menu-right"></i>
+                    </button>
+                    <button class="btn btn-toggle sidenav-toggler">
+                        <i class="gg-menu-left"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+            <div class="sidebar-content">
+                <ul class="nav nav-secondary">
+                    <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                        <h4 class="text-section">Main</h4>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                                data-bs-toggle="collapse"
+                                th:href="@{/admin}"
+                                class="collapsed"
+                                aria-expanded="false"
+                        >
+                            <i class="fas fa-home"></i>
+                            <p>Thống Kê</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#sanpham">
+                            <i class="fas fa-layer-group"></i>
+                            <p>Quản Lí Sản Phẩm</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="sanpham">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a th:href="@{/san-pham}">
+                                        <span class="sub-item">Sản Phẩm</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/chat-lieu}">
+                                        <span class="sub-item">Chất Liệu</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/kich-thuoc}">
+                                        <span class="sub-item">Kích Thước</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/mau-sac}">
+                                        <span class="sub-item">Màu Sắc</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/thuong-hieu}">
+                                        <span class="sub-item">Thương Hiệu</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                                data-bs-toggle="collapse"
+                                th:href="@{/hoa-don}"
+                                class="collapsed"
+                                aria-expanded="false"
+                        >
+                            <i class="fas fa-money-bill"></i>
+                            <span class="sub-item">Quản Lí Hóa Đơn</span>
+                        </a>
+                    </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</sidebar>
+<!-- End of Sidebar -->
