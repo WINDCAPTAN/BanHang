@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head"></div>
+<body>
+<div class="wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/sidebar"></div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+        <div class="main-header">
+            <div class="main-header-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="../index.html" class="logo">
+                        <img
+                                th:src="@{/assets/img/kaiadmin/logo_light.svg}"
+                                alt="navbar brand"
+                                class="navbar-brand"
+                        />
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <!-- Navbar Header -->
+            <div th:replace="fragments/topbar"></div>
+            <!-- End Navbar -->
+        </div>
+        <!--Nội Dung-->
+        <div class="container">
+            <div class="page-inner">
+                <span class="border">
+                <h2>Danh Sách Thương Hiệu</h2>
+                <br>
+                <div class="row">
+                    <div class="col-6">
+                        <form action="">
+                            <input type="text" placeholder="Tìm thương hiệu theo tên...">
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addThuongHieuModal">Thêm Thương Hiệu</a>
+                    </div>
+                </div>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tên Thương Hiệu</th>
+                        <th scope="col">Trạng Thái</th>
+                        <th scope="col">Ngày Tạo</th>
+                        <th scope="col">Hành Động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="s,iterStat : ${listTH}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${s.ten}"></td>
+                        <td th:text="${s.trangThai ? 'Khả Dụng':'Không Khả Dụng'}"></td>
+                        <td th:text="${s.ngayTao}"></td>
+                        <td>
+                            <a th:href="@{'/thuong-hieu/delete/' + ${s.id}}"
+                               onclick="return confirm('Bạn muốn xóa thương hiệu này đúng không ?')">Xóa</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </span>
+            </div>
+            <!-- /.container-fluid -->
+            <div class="modal fade" id="addThuongHieuModal" tabindex="-1" role="dialog"
+                 aria-labelledby="addThuongHieuModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addThuongHieuModalLabel">Thêm Thương Hiệu Mới</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Form to add new Chat Lieu -->
+                            <form id="addThuongHieuForm" th:action="@{/thuong-hieu/add}" method="post">
+                                <div class="form-group">
+                                    <label for="tenThuongHieu">Tên Thương Hiệu:</label>
+                                    <input type="text" class="form-control" id="tenThuongHieu" name="ten"
+                                           placeholder="Nhập tên thương hiệu">
+                                </div>
+                                <!-- Add other form fields if needed -->
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary">Thêm Thương Hiệu</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/footer"></div>
+    </div>
+
+    <!-- Custom template | don't include it in your project! -->
+
+    <!-- End Custom template -->
+</div>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+<!-- Chart JS -->
+<script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+
+<!-- jQuery Sparkline -->
+<script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle -->
+<script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+
+<!-- Datatables -->
+<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+
+<!-- Bootstrap Notify -->
+<script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+<script src="../assets/js/plugin/jsvectormap/world.js"></script>
+
+<!-- Google Maps Plugin -->
+<script src="../assets/js/plugin/gmaps/gmaps.js"></script>
+
+<!-- Sweet Alert -->
+<script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+<!-- Kaiadmin JS -->
+<script src="../assets/js/kaiadmin.min.js"></script>
+
+<!-- Kaiadmin DEMO methods, don't include it in your project! -->
+<script src="../assets/js/setting-demo2.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
