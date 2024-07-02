@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label  class="col-form-label">Sản Phẩm</label>
                                 <div class="input-group mb-3">
-                                    <select class="form-control" id="sanPham" name="sanPham" readonly="">
+                                    <select class="form-control" id="sanPham" name="sanPham" >
                                         <option th:each="product : ${listSPCT}" th:value="${product.sanPham.id}" th:text="${product.sanPham.ten}">
                                         </option>
                                     </select>
@@ -76,19 +76,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="soLuong">Số Lượng</label>
-                                <input type="number" class="form-control" id="soLuong" name="soLuong" required>
+                                <input type="number" class="form-control" id="soLuong" name="soLuong" >
                             </div>
                             <div class="form-group">
                                 <label for="giaBan">Giá Bán</label>
-                                <input type="number" class="form-control" id="giaBan" name="giaBan" step="0.01" required>
+                                <input type="number" class="form-control" id="giaBan" name="giaBan" step="0.01" >
                             </div>
                             <div class="form-group">
                                 <label for="maVach">Mã Vạch</label>
-                                <input type="text" class="form-control" id="maVach" name="maVach" required>
+                                <input type="text" class="form-control" id="maVach" name="maVach" >
                             </div>
                             <div class="form-group">
                                 <label for="hinhAnh">Hình Ảnh</label>
-                                <input type="text" class="form-control" id="hinhAnh" name="hinhAnh" required>
+                                <input type="text" class="form-control" id="hinhAnh" name="hinhAnh" >
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-primary">Thêm</button>
